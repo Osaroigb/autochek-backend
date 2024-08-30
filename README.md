@@ -1,85 +1,119 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Autochek Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Autochek Vehicle Valuation and Loan Processing Backend Service
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This backend service supports vehicle valuation and loan processing for Autochek. It ingests vehicle data, provides valuations, processes loan applications, and updates loan statuses. The backend leverages NestJS with SQLite for data storage and integrates with a vehicle valuation model.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Vehicle data ingestion and management
+- Vehicle valuation requests and processing
+- Loan application submission and status updates
+- Integration with third-party vehicle valuation model
+- Secure and scalable architecture
 
-## Project setup
+## Getting Started
 
-```bash
-$ npm install
-```
+### Prerequisites
 
-## Compile and run the project
+Ensure you have the following installed:
+- Node.js 16.x or newer
+- npm or yarn
+- SQLite3 (in-memory database for development)
 
-```bash
-# development
-$ npm run start
+### Installation
 
-# watch mode
-$ npm run start:dev
+1. **Clone the Repository**
 
-# production mode
-$ npm run start:prod
-```
+    Clone this repository to your local machine and navigate into it:
 
-## Run tests
+    ```bash
+    git clone https://github.com/Osaroigb/autochek-backend.git
+    cd autochek-backend
+    ```
 
-```bash
-# unit tests
-$ npm run test
+2. **Install Dependencies**
 
-# e2e tests
-$ npm run test:e2e
+    Install the required packages:
 
-# test coverage
-$ npm run test:cov
-```
+    ```bash
+    npm install
+    ```
 
-## Resources
+    Or, if you're using Yarn:
 
-Check out a few resources that may come in handy when working with NestJS:
+    ```bash
+    yarn install
+    ```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+3. **Configure Environment Variables**
 
-## Support
+    Create a `.env` file in the root directory based on the `.env.example` file:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    ```bash
+    cp .env.example .env  # Unix/MacOS
+    copy .env.example .env  # Windows
+    ```
 
-## Stay in touch
+    Update the `.env` file with your environment variables:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+    ```
+    JWT_SECRET_KEY=your_jwt_secret_key
+    RAPIDAPI_HOST=vin-lookup2.p.rapidapi.com
+    RAPIDAPI_KEY=your_rapidapi_key
+    ```
 
-## License
+4. **Run the Application**
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+    Start the application in development mode:
+
+    ```bash
+    npm run start:dev
+    ```
+
+    Or, if you're using Yarn:
+
+    ```bash
+    yarn start:dev
+    ```
+
+    The API will be accessible at `http://localhost:3300/`.
+
+### API Endpoints
+
+- **User Authentication**
+  - **POST /signup**: Register a new user. Provides user details (e.g., username, password) for account creation.
+  - **POST /login**: Authenticate a user. Provides credentials (e.g., username, password) to obtain a token for subsequent requests.
+
+- **Vehicle Data Ingestion**
+  - **POST /vehicles**: Ingest vehicle data.
+  - **GET /vehicles/{id}**: Retrieve vehicle details.
+
+- **Vehicle Valuation Requests**
+  - **POST /vehicles/{id}/valuation**: Request valuation for a vehicle.
+  - **GET /valuations/{id}**: Retrieve vehicle valuation details.
+
+- **Loan Application Submission**
+  - **POST /loans**: Submit a loan application.
+  - **GET /loans/{id}**: Retrieve loan application details.
+
+- **Loan Status Updates**
+  - **PATCH /loans/{id}/status**: Update loan status.
+
+### Documentation
+
+For detailed API documentation, including endpoints, request/response formats, and error codes, visit the [Postman API Documentation](https://documenter.getpostman.com/view/23691550/2sAXjKbYhU).
+
+### Additional Instructions
+
+- **Validation Rules**: 
+  - Minimum loan amount: #10,000
+  - Maximum loan amount: #500,000
+  - Minimum credit score: 600
+  - Maximum debt-to-income ratio: 50%
+  - Maximum loan term: 30 years
+  - Vehicles made before 1900 or beyond 2025 are not valued.
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
