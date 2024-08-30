@@ -1,17 +1,22 @@
 src/
-├── common/
-│   │ 
-│   │ 
-│   ├── dto/
-│   │   │
-│   │   ├── create-loan.dto.ts
-│   │   ├── create-valuation.dto.ts
-│   │   ├── create-vehicle.dto.ts
-│   │   └── update-status.dto.ts
-│   │ 
-│   │ 
-│   └── interfaces/
-│       └── response.interface.ts
+|
+├── auth/
+│   │
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── jwt-auth.guard.ts
+│   ├── jwt-payload.interface.ts
+│   └── jwt.strategy.ts
+│
+│ 
+├── dto/
+│   │
+│   ├── create-loan.dto.ts
+│   ├── create-valuation.dto.ts
+│   ├── create-vehicle.dto.ts
+│   ├── login-user.dto.ts
+│   └── update-loan-status.dto.ts
 │
 │
 ├── entities/
@@ -43,12 +48,13 @@ src/
 │
 │
 ├── users/
-│   ├── users.controller.ts
 │   ├── users.service.ts
 │   └── users.module.ts
 │
 |
 ├── app.module.ts
+|
+├── app.service.ts
 │
 ├── main.ts
 │   
