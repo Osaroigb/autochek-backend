@@ -6,8 +6,11 @@ export class Valuation {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("decimal")
+  @Column('decimal')
   estimatedValue: number;
+
+  @Column()
+  source: string;
 
   @Column()
   date: Date;

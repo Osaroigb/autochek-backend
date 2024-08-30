@@ -4,9 +4,11 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { Valuation } from './valuation.entity';
+import { LoanApplication } from './loan-application.entity';
 
 @Entity()
 export class Vehicle {
@@ -31,4 +33,7 @@ export class Vehicle {
   @OneToOne(() => Valuation, (valuation) => valuation.vehicle)
   @JoinColumn()
   valuation: Valuation;
+
+  @OneToMany(() => LoanApplication, (loanApplication) => loanApplication.user)
+  loanApplications: LoanApplication[];
 }

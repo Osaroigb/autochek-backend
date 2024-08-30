@@ -1,4 +1,5 @@
 import { User } from './user.entity';
+import { Vehicle } from './vehicle.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
@@ -20,4 +21,7 @@ export class LoanApplication {
 
   @ManyToOne(() => User, (user) => user.loanApplications)
   user: User;
+
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.loanApplications)
+  vehicle: Vehicle;
 }
