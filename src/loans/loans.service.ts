@@ -1,12 +1,14 @@
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateLoanDto } from '../common/dto/create-loan.dto';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { LoanApplication } from '../entities/loan-application.entity';
-import { UpdateLoanStatusDto } from '../common/dto/update-loan-status.dto';
+import { CreateLoanDto } from '../dto/create-loan.dto';
+import { UpdateLoanStatusDto } from '../dto/update-loan-status.dto';
+import { LoanApplication, LoanStatus } from '../entities/loan-application.entity.js';
+import { Injectable, NotFoundException, Logger, BadRequestException, ForbiddenException } from '@nestjs/common';
 
 @Injectable()
 export class LoansService {
+  private readonly logger = new Logger(LoansService.name);
+
   constructor(
     @InjectRepository(LoanApplication)
     private readonly loanRepository: Repository<LoanApplication>,
@@ -16,8 +18,15 @@ export class LoansService {
     const isEligible = await this.checkLoanEligibility(createLoanDto);
 
     if (!isEligible) {
-      throw new NotFoundException('Loan application does not meet eligibility criteria');
+      this.logger.error('Loan application does not meet eligibility criteria');
+
+      throw new ForbiddenException(
+        'Loan application does not meet eligibility criteria',
+      );
     }
+
+    //? Set default status to "pending"
+    createLoanDto.status = LoanStatus.PENDING;
 
     const loan = this.loanRepository.create(createLoanDto);
     return this.loanRepository.save(loan);
@@ -29,6 +38,8 @@ export class LoansService {
     const maxLoanValue = 500000;
     const minCreditScore = 600;
     const maxDebtToIncomeRatio = 0.5;
+
+    this.logger.log('Checking loan eligibility....');
 
     //? Check loan value
     if (
@@ -56,6 +67,7 @@ export class LoansService {
     const loan = await this.loanRepository.findOne({ where: { id } });
 
     if (!loan) {
+      this.logger.error(`Loan Application with ID ${id} not found`);
       throw new NotFoundException(`Loan Application with ID ${id} not found`);
     }
 
@@ -69,7 +81,14 @@ export class LoansService {
     const loan = await this.loanRepository.findOne({ where: { id } });
 
     if (!loan) {
+      this.logger.error(`Loan Application with ID ${id} not found`);
       throw new NotFoundException(`Loan Application with ID ${id} not found`);
+    }
+
+    if (!['APPROVED', 'REJECTED'].includes(updateLoanDto.status)) {
+      this.logger.error(`Invalid status: ${updateLoanDto.status}`);
+      
+      throw new BadRequestException(`Status can only be updated to 'APPROVED' or 'REJECTED'`);
     }
 
     loan.status = updateLoanDto.status;

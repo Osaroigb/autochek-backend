@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 import { Valuation } from './valuation.entity';
-import { LoanApplication } from './loan-application.entity';
+import { LoanApplication } from './loan-application.entity.js';
 
 @Entity()
 export class Vehicle {
@@ -30,7 +30,7 @@ export class Vehicle {
   @Column('integer')
   mileage: number;
 
-  @OneToOne(() => Valuation, (valuation) => valuation.vehicle, { nullable: true })
+  @OneToOne(() => Valuation, (valuation) => valuation.vehicle)
   @JoinColumn()
   valuation: Valuation;
 

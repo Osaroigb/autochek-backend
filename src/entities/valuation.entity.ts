@@ -54,6 +54,6 @@ export class Valuation {
   @Column({ length: 50 })
   uid: string;
 
-  @OneToOne(() => Vehicle, (vehicle) => vehicle.valuation)
+  @OneToOne(() => Vehicle, (vehicle) => vehicle.valuation, { eager: true })
   vehicle: Vehicle;
 }

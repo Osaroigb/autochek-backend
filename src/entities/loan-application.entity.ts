@@ -3,9 +3,9 @@ import { Vehicle } from './vehicle.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 export enum LoanStatus {
-  PENDING = 'pending',
-  APPROVED = 'approved',
-  REJECTED = 'rejected',
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
 }
 
 @Entity()
@@ -28,8 +28,8 @@ export class LoanApplication {
   @Column('decimal')
   debtToIncomeRatio: number;
 
-  @Column({ type: 'enum', enum: LoanStatus })
-  status: LoanStatus;
+  @Column({ length: 10 })
+  status: string;
 
   @ManyToOne(() => User, (user) => user.loanApplications)
   user: User;

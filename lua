@@ -32,6 +32,7 @@ src/
 ├── valuations/
 │   ├── valuations.controller.ts
 │   ├── valuations.service.ts
+|   ├── rapidapi.service.ts
 │   └── valuations.module.ts
 │
 │

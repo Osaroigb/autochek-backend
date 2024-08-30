@@ -3,31 +3,34 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Vehicle } from '../entities/vehicle.entity';
 import { RapidApiService } from './rapidapi.service';
 import { Valuation } from '../entities/valuation.entity';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateValuationDto } from '../common/dto/create-valuation.dto';
+import { CreateValuationDto } from '../dto/create-valuation.dto';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 
 @Injectable()
 export class ValuationsService {
+  private readonly logger = new Logger(ValuationsService.name);
+
   constructor(
     @InjectRepository(Valuation)
-    private readonly rapidApiService: RapidApiService,
     private readonly valuationRepository: Repository<Valuation>,
+
+    @InjectRepository(Vehicle)
+    private readonly vehicleRepository: Repository<Vehicle>,
+
+    private readonly rapidApiService: RapidApiService,
   ) {}
 
-  async create(
-    vehicleId: number,
-  ): Promise<Valuation> {
-    //? Fetch the vehicle entity using the vehicleId
-    const vehicleRepository =
-      this.valuationRepository.manager.getRepository(Vehicle);
+  async create(vehicleId: number): Promise<Valuation> {
+    this.logger.log(`Creating valuation for vehicle ID ${vehicleId}`);
 
-    const vehicle = await vehicleRepository.findOne({
+    const vehicle = await this.vehicleRepository.findOne({
       where: {
         id: vehicleId,
       },
     });
 
     if (!vehicle) {
+      this.logger.error(`Vehicle with ID ${vehicleId} not found`);
       throw new NotFoundException(`Vehicle with ID ${vehicleId} not found`);
     }
 
@@ -61,22 +64,18 @@ export class ValuationsService {
     //? Create a new Valuation entity using the CreateValuationDto
     const valuation: Valuation = this.valuationRepository.create(createValuation);
     return this.valuationRepository.save(valuation);
-
-    // const valuation = this.valuationRepository.create({
-    //   ...valuationData,
-    //   vehicle: { id: vehicleId }, //? TypeScript needs type casting
-    // });
-
-    // return this.valuationRepository.save(valuation)[0];
   }
 
-async findOne(id: number): Promise<Valuation> {
+  async findOne(id: number): Promise<Valuation> {
+    this.logger.log(`Finding valuation for vehicle ID ${id}`);
+
     const valuation = await this.valuationRepository.findOne({
       where: { id },
       relations: ['vehicle'],
     });
 
     if (!valuation) {
+      this.logger.error(`Vehicle valuation with ID ${id} not found`);
       throw new NotFoundException(`Vehicle valuation with ID ${id} not found`);
     }
 

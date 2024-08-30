@@ -1,9 +1,9 @@
-import { IsInt, IsDecimal, IsEnum, Max, Min } from 'class-validator';
+import { IsInt, IsDecimal, Max, Min, IsString, MaxLength } from 'class-validator';
 
 export enum LoanStatus {
-  PENDING = 'pending',
-  APPROVED = 'approved',
-  REJECTED = 'rejected',
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
 }
 
 export class CreateLoanDto {
@@ -25,8 +25,9 @@ export class CreateLoanDto {
   @IsDecimal()
   debtToIncomeRatio: number;
 
-  @IsEnum(LoanStatus)
-  status: LoanStatus;
+  @IsString()
+  @MaxLength(10)
+  status: string;
 
   @IsInt()
   @Min(1)

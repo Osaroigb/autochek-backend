@@ -1,10 +1,12 @@
 import { LoansService } from './loans.service';
-import { CreateLoanDto } from '../common/dto/create-loan.dto';
-import { LoanApplication } from '../entities/loan-application.entity';
-import { Controller, Post, Get, Patch, Param, Body } from '@nestjs/common';
-import { UpdateLoanStatusDto } from '../common/dto/update-loan-status.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateLoanDto } from '../dto/create-loan.dto';
+import { UpdateLoanStatusDto } from '../dto/update-loan-status.dto';
+import { LoanApplication } from '../entities/loan-application.entity.js';
+import { Controller, Post, Get, Patch, Param, Body, UseGuards } from '@nestjs/common';
 
 @Controller('loans')
+@UseGuards(JwtAuthGuard)
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}
 
