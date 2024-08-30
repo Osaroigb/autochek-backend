@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RapidApiService {
-  private rapidApiHost: string = 'vin-lookup2.p.rapidapi.com';
-  private rapidApiKey: string ='2795187f41mshd52a12aebd0fac1p13d74bjsne1b8105830ab';
+  private rapidApiHost: string = '';
+  private rapidApiKey: string = '';
 
   async getValuation(vin: string): Promise<any> {
     const options = {
