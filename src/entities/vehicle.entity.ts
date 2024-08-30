@@ -15,25 +15,25 @@ export class Vehicle {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ length: 50 })
   vin: string;
 
-  @Column()
+  @Column({ length: 25 })
   make: string;
 
-  @Column()
+  @Column({ length: 25 })
   model: string;
 
-  @Column()
+  @Column('integer')
   year: number;
 
-  @Column()
+  @Column('integer')
   mileage: number;
 
-  @OneToOne(() => Valuation, (valuation) => valuation.vehicle)
+  @OneToOne(() => Valuation, (valuation) => valuation.vehicle, { nullable: true })
   @JoinColumn()
   valuation: Valuation;
 
-  @OneToMany(() => LoanApplication, (loanApplication) => loanApplication.user)
+  @OneToMany(() => LoanApplication, (loanApplication) => loanApplication.vehicle)
   loanApplications: LoanApplication[];
 }
