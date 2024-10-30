@@ -62,7 +62,8 @@ export class ValuationsService {
     };
 
     //? Create a new Valuation entity using the CreateValuationDto
-    const valuation: Valuation = this.valuationRepository.create(createValuation);
+    const valuation: Valuation =
+      this.valuationRepository.create(createValuation);
     return this.valuationRepository.save(valuation);
   }
 

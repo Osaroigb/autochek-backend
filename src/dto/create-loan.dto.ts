@@ -1,4 +1,11 @@
-import { IsInt, IsDecimal, Max, Min, IsString, MaxLength } from 'class-validator';
+import {
+  Max,
+  Min,
+  IsInt,
+  IsString,
+  IsDecimal,
+  MaxLength,
+} from 'class-validator';
 
 export enum LoanStatus {
   PENDING = 'PENDING',

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../entities/user.entity';
 import { Injectable, Logger } from '@nestjs/common';
-import { UsersService } from '../users/users.service'; 
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
@@ -34,7 +35,9 @@ export class AuthService {
     const payload = { username: loggedUser.username, sub: loggedUser.id };
 
     return {
-      access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY }),
+      access_token: this.jwtService.sign(payload, {
+        secret: process.env.JWT_SECRET_KEY,
+      }),
     };
   }
 

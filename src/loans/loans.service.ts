@@ -1,9 +1,20 @@
+import {
+  Logger,
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+  BadRequestException,
+} from '@nestjs/common';
+
+import {
+  LoanStatus,
+  LoanApplication,
+} from '../entities/loan-application.entity.js';
+
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLoanDto } from '../dto/create-loan.dto';
 import { UpdateLoanStatusDto } from '../dto/update-loan-status.dto';
-import { LoanApplication, LoanStatus } from '../entities/loan-application.entity.js';
-import { Injectable, NotFoundException, Logger, BadRequestException, ForbiddenException } from '@nestjs/common';
 
 @Injectable()
 export class LoansService {
@@ -87,8 +98,10 @@ export class LoansService {
 
     if (!['APPROVED', 'REJECTED'].includes(updateLoanDto.status)) {
       this.logger.error(`Invalid status: ${updateLoanDto.status}`);
-      
-      throw new BadRequestException(`Status can only be updated to 'APPROVED' or 'REJECTED'`);
+
+      throw new BadRequestException(
+        `Status can only be updated to 'APPROVED' or 'REJECTED'`,
+      );
     }
 
     loan.status = updateLoanDto.status;

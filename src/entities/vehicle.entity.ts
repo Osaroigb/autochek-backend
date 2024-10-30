@@ -1,10 +1,10 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   OneToOne,
-  JoinColumn,
   OneToMany,
+  JoinColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { Valuation } from './valuation.entity';
@@ -34,6 +34,9 @@ export class Vehicle {
   @JoinColumn()
   valuation: Valuation;
 
-  @OneToMany(() => LoanApplication, (loanApplication) => loanApplication.vehicle)
+  @OneToMany(
+    () => LoanApplication,
+    (loanApplication) => loanApplication.vehicle,
+  )
   loanApplications: LoanApplication[];
 }

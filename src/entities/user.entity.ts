@@ -12,10 +12,8 @@ export class User {
   @Column({ length: 20 })
   password: string;
 
-  
   @OneToMany(() => LoanApplication, (loanApplication) => loanApplication.user, {
     cascade: true,
   })
-
   loanApplications: LoanApplication[];
 }

@@ -1,14 +1,9 @@
 import * as https from 'https';
 import { Injectable } from '@nestjs/common';
-// import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class RapidApiService {
   constructor() {}
-
-  // constructor(private readonly configService: ConfigService) {}
-  // private rapidApiHost: string = this.configService.get<string>('RAPID_API_HOST');
-  // private rapidApiKey: string = this.configService.get<string>('RAPID_API_KEY');
 
   async getValuation(vin: string): Promise<any> {
     const options = {

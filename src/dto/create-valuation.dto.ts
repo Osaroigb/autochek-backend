@@ -1,11 +1,4 @@
-import {
-  IsDecimal,
-  IsString,
-  // IsDate,
-  MaxLength,
-  IsInt,
-  Max,
-} from 'class-validator';
+import { IsDecimal, IsString, MaxLength, IsInt, Max } from 'class-validator';
 
 export class CreateValuationDto {
   @IsString()

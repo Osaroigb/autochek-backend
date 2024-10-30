@@ -9,5 +9,4 @@ import { LoanApplication } from '../entities/loan-application.entity.js';
   providers: [LoansService],
   controllers: [LoansController],
 })
-
 export class LoansModule {}

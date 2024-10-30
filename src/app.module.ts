@@ -27,3 +27,13 @@ dotenv.config();
 })
 
 export class AppModule {}
+
+
+// TODO: implement single responsibility in valuations.service adhering to SOLID principles
+//? there should only be on repository injected in the constructor
+
+// TODO: add error handling for vehicles that don't exist when creating a loan
+
+// TODO: implement user access control (admin, user, guest)
+//? admins can add/create vehicles
+//? users can ONLY apply for loans

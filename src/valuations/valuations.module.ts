@@ -11,5 +11,4 @@ import { ValuationsController } from './valuations.controller';
   providers: [ValuationsService, RapidApiService],
   controllers: [ValuationsController],
 })
-
 export class ValuationsModule {}
